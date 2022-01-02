@@ -11,7 +11,7 @@ export default function Welcome () {
     return (
         <MainLayout fullHeight>
             <AuthLayout title="Welcome To G2T" description="Get Started by creating an account or Loggin in">
-                <div className="d-flex flex-column justify-content-space-evenly" style={{width: '50%', height: '30%'}}>
+                <div className="auth_layout--content d-flex flex-column justify-content-space-evenly">
                     <h1><strong>G2T</strong></h1>
                     <p>Let's Get You Started!😎🚀</p>
                     <Button className="mt-3" variant={'success'} onClick={() => navigate('/login')}>Login To Your Account</Button>

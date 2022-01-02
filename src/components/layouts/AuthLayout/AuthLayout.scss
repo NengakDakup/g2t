@@ -14,3 +14,21 @@
     align-items: center;
     justify-content: center;
 }
+
+.auth_layout--content {
+    width: 50%;
+    height: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .auth_layout--left {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .auth_layout--right > .auth_layout--content { 
+        width: 90%!important;
+        height: auto!important;
+    }
+}

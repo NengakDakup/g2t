@@ -10,4 +10,26 @@ $theme-colors: (
 body {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 20px;
+  background-color: #deeae5;
+}
+
+.form-control:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 2px 0.1rem #4d8d6e;
+} 
+
+a {
+  color: #28a745;
+}
+
+a:hover {
+  color: #4d8d6e;
+}
+
+a:active {
+  color: #28a745;
+}
+
+a:visited {
+  color: $success;
 }
