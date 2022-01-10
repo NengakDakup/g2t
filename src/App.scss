@@ -33,3 +33,9 @@ a:active {
 a:visited {
   color: $success;
 }
+
+.form_navigation {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

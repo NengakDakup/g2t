@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import {Link, useNavigate} from 'react-router-dom'
 import { Container, Row, Col, Button, Form } from "react-bootstrap"
 import {FaUserCheck, FaRegEdit, FaFingerprint} from "react-icons/fa";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, fetchUserData, logout } from "../../firebase";
 
 import MainLayout from "../../components/layouts/MainLayout/MainLayout";
 import DashboardLayout from "../../components/layouts/DashboardLayout/DashboardLayout";
@@ -10,12 +12,36 @@ import Card from "../../components/card/Card"
 import ProfileForm from "../../components/forms/ProfileForm";
 
 export default function Dashboard() {
+    const [user, loading, error] = useAuthState(auth);
+    const [userData, setUserData] = useState();
+    let navigate = useNavigate('');
+
+    async function fetchData(uid){
+        let res = await fetchUserData(uid);
+        console.log('res', res);
+        setUserData(res);
+    }
+
+    useEffect(() => {
+        if (loading) return;
+        if (!user) return navigate("/login");
+        fetchData(user.uid);
+        
+    }, [user, loading]);
+
     return (
         <MainLayout style={{paddingTop: 60}}>
             <Header />
+            {!userData ? 
             <DashboardLayout>
                 <Card>
-                    <p><strong>Welcome Back </strong>😉</p>
+                    <p>Loading...</p>
+                </Card>
+            </DashboardLayout>
+            : 
+            <DashboardLayout>
+                <Card>
+                    <p><strong>Welcome Back {userData.name}</strong>😉</p>
                     <p>Here's How to get Started ⚡</p>
                     <Row>
                         <Col>
@@ -47,13 +73,13 @@ export default function Dashboard() {
 
                 <Card>
                     <p><strong>Profile Information</strong> 🔎</p>
-                    <span>It Looks Like You've previously entered Your Information<br/>
-                    You can go ahead to edit/update your information then save it</span>
-                    <ProfileForm />
-                    <Button variant="success" className="mt-3">Edit / Update My Record</Button>
+                    <span>You can go ahead to edit/update your information then save it</span>
+                    <Button onClick={() => navigate("/form")} variant="success" className="mt-3">Edit / Update My Record</Button>
                 </Card>
             
             </DashboardLayout>
+            }
+            
             
         </MainLayout>
     )

@@ -1,5 +1,5 @@
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route
 } from "react-router-dom";
@@ -12,10 +12,13 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Reset from './pages/reset';
 import Dashboard from './pages/dashboard';
+import FormPage from './pages/form';
+import AdminPage from './pages/admin';
+import TablePage from "./pages/table";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
         <Routes>
           
         <Route path='/' element={<Welcome/> }/>
@@ -24,10 +27,11 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/reset' element={<Reset />} />
         <Route path='/dashboard' element={<Dashboard />} />
-      
-          
+        <Route path='/form' element={<FormPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/records" element={<TablePage /> } />
         </Routes>   
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

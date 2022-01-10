@@ -1,7 +1,7 @@
 import react, {useState} from 'react';
 import {Form, Row, Col } from 'react-bootstrap';
 
-export default function ProfileForm({setData, data, disabled}){
+export default function EmploymentForm({setData, data, disabled}){
 
     function updateItem(index, val){
         setData(data.map((item, i) => {
@@ -13,9 +13,10 @@ export default function ProfileForm({setData, data, disabled}){
             }
         }))
     }
+
     return (
             <Form.Group className="mb-3">
-                <h1>ProfileForm</h1>
+                <h1>EmploymentForm</h1>
                 <Row className="mb-3">
                     {data.map((item, index) => {
                         return (
