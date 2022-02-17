@@ -20,6 +20,105 @@ export default function FormPage() {
     const [user, loading, error] = useAuthState(auth);
     let [profileData, setProfileData] = useState([
         {
+            title: 'Title',
+            type: 'select',
+            value: '',
+            options: ['Mr', 'Mrs', 'Ms', 'Dr', 'Prof', 'Chief']
+        },
+        {
+            title: 'Surname',
+            type: 'text',
+            value: ''
+        },
+        {
+            title: 'First Name',
+            type: 'text',
+            value: ''
+        },
+        {
+            title: 'Last Name',
+            type: 'text',
+            value: ''
+        },
+        {
+            title: 'Gender',
+            type: 'select',
+            value: '',
+            options: ['Male', 'Female']
+        },
+        {
+            title: 'Date Of Birth',
+            type: 'date',
+            value: ''
+        },
+        {
+            title: 'Marital Status',
+            type: 'select',
+            value: '',
+            options: ['Married', 'Single', 'Divorced', 'Widow/Widower']
+        },
+        {
+            title: 'Date Of Marriage',
+            type: 'date',
+            value: ''
+        },
+        {
+            title: 'Date Of Divorce',
+            type: 'date',
+            value: ''
+        },
+        {
+            title: 'Date Of Widow/Widower',
+            type: 'date',
+            value: ''
+        },
+        {
+            title: 'Number of Children',
+            type: 'number',
+            value: ''
+        },
+        {
+            title: 'Number of Dependents',
+            type: 'number',
+            value: ''
+        },
+        {
+            title: 'Physical Address',
+            type: 'text',
+            value: ''
+        },
+        {
+            title: 'Office Address',
+            type: 'text',
+            value: ''
+        },
+        {
+            title: 'Do You Have Any Disability?',
+            type: 'select',
+            value: '',
+            options: ['Yes', 'No']
+        },
+        {
+            title: 'If Yes Specify',
+            type: 'text',
+            value: ''
+        },
+        {
+            title: 'When Did it Occur?',
+            type: 'select',
+            value: '',
+            options: ['Before Graduation', 'After Graduation']
+        },
+        {
+            title: 'Contact [Mobile Phone Number]',
+            type: 'text',
+            value: ''
+        },
+
+
+
+
+        {
             title: 'Matriculation Number',
             type: 'text',
             value: ''
@@ -46,7 +145,7 @@ export default function FormPage() {
         },
         {
             title: 'Class Of Degree',
-            type: 'text',
+            type: 'select',
             value: '',
             options: [
                 'First Class',
@@ -66,41 +165,10 @@ export default function FormPage() {
             type: 'text',
             value: ''
         },
-        {
-            title: 'Marital Status',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Date Of Birth',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Date of Marriage',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Number of Children',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Number of Dependents',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Physical Address',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Contact',
-            type: 'text',
-            value: ''
-        },
+        
+        
+        
+        
     ]);
     let [qualificationData, setQualificationData] = useState([
         {
@@ -113,6 +181,11 @@ export default function FormPage() {
             type: 'text',
             value: ''
         },
+        {
+            title: 'Highest Qualification',
+            type: 'text',
+            value: ''
+        }
     ]);
     let [employmentData, setEmploymentData] = useState([
         {
@@ -126,7 +199,12 @@ export default function FormPage() {
             value: ''
         },
         {
-            title: 'Appoinment Date',
+            title: 'Name of Organisation',
+            type: 'text',
+            value: ''
+        },
+        {
+            title: 'Year Of Employment',
             type: 'text',
             value: ''
         },
@@ -146,7 +224,17 @@ export default function FormPage() {
             value: ''
         },
         {
-            title: 'Job Assessment',
+            title: 'Job Description',
+            type: 'text',
+            value: ''
+        },
+        {
+            title: 'Year Of Termination',
+            type: 'text',
+            value: ''
+        },
+        {
+            title: 'Reason For Termination',
             type: 'text',
             value: ''
         },

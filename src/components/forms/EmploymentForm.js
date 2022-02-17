@@ -16,7 +16,7 @@ export default function EmploymentForm({setData, data, disabled}){
 
     return (
             <Form.Group className="mb-3">
-                <h1>EmploymentForm</h1>
+                <h1>Employment</h1>
                 <Row className="mb-3">
                     {data.map((item, index) => {
                         return (

@@ -16,7 +16,7 @@ export default function QualificationForm({setData, data, disabled}){
 
     return (
             <Form.Group className="mb-3">
-                <h1>QualificationForm</h1>
+                <h1>Qualifications</h1>
                 <Row className="mb-3">
                     {data.map((item, index) => {
                         return (
