@@ -14,6 +14,24 @@ import ProfileForm from "../../components/forms/ProfileForm";
 import QualificationForm from "../../components/forms/QualificationForm";
 import EmploymentForm from "../../components/forms/EmploymentForm";
 
+import universities from '../../universities.json';
+import polytechnics from '../../polytechnics.json';
+import colleges from '../../colleges.json'
+
+const salaryRange = (min, max, interval) => {
+    let arr = [];
+    for(let i = min; i < max; i+=interval){
+        let txt = `${i},000 - ${i+interval},000`; 
+        console.log(txt)
+        arr.push(txt)
+        
+    }
+    return arr;
+}
+
+
+
+
 export default function FormPage() {
     let navigate = useNavigate('');
     let [activeTab, setActiveTab] = useState(1)
@@ -111,25 +129,56 @@ export default function FormPage() {
         },
         {
             title: 'Contact [Mobile Phone Number]',
-            type: 'text',
+            type: 'number',
             value: ''
         },
-
-
-
-
+        {
+            title: 'Institution Attended',
+            type: 'select',
+            value: '',
+            options: ['University', 'Polytechnic', 'College Of Education']
+        },
+        {
+            title: 'University Attended',
+            type: 'select',
+            value: '',
+            options: universities.map(item => item.name)
+        },
+        {
+            title: 'Polytechnic Attended',
+            type: 'select',
+            value: '',
+            options: polytechnics.map(item => item)
+        },
+        {
+            title: 'College Attended',
+            type: 'select',
+            value: '',
+            options: colleges.map(item => item.name)
+        },
+        {
+            title: 'Year Of Entry',
+            type: 'date',
+            value: ''
+        },
+        {
+            title: 'Entry Mode',
+            type: 'select',
+            value: '',
+            options: ['Sandwich', 'Part Time', 'Full Time']
+        },
         {
             title: 'Matriculation Number',
             type: 'text',
             value: ''
         },
         {
-            title: 'Entry Year',
-            type: 'number',
+            title: 'Faculty / School',
+            type: 'text',
             value: ''
         },
         {
-            title: 'Entry Mode',
+            title: 'Department',
             type: 'text',
             value: ''
         },
@@ -139,8 +188,8 @@ export default function FormPage() {
             value: ''
         },
         {
-            title: 'Graduation Year',
-            type: 'number',
+            title: 'Year Of Graduation',
+            type: 'date',
             value: ''
         },
         {
@@ -152,13 +201,13 @@ export default function FormPage() {
                 'Second Class Upper',
                 'Second Class Lower',
                 'Third class',
-                'Good Academic Standing'
+                'Pass',
+                'Distinction',
+                'Upper Credit',
+                'Lower Credit',
+                'Credit',
+                'Merit'
             ]
-        },
-        {
-            title: 'Special Skill',
-            type: 'text',
-            value: ''
         },
         {
             title: 'Awards',
@@ -172,39 +221,44 @@ export default function FormPage() {
     ]);
     let [qualificationData, setQualificationData] = useState([
         {
-            title: 'Post Graduate Qualification',
-            type: 'text',
-            value: ''
+            title: 'First Qualification',
+            type: 'select',
+            value: '',
+            options: ['NCE', 'ND', 'HND', 'BSC / BED / BTECH']
         },
         {
-            title: 'Courses After Graduation',
-            type: 'text',
-            value: ''
+            title: 'New Qualification',
+            type: 'select',
+            value: '',
+            options: ['NCE', 'ND', 'HND', 'BSC / BED / BTECH', 'PGD / PGDE', 'MSC / MBA', 'PHD']
         },
         {
             title: 'Highest Qualification',
+            type: 'select',
+            value: '',
+            options: ['NCE', 'ND', 'HND', 'BSC / BED / BTECH', 'PGD / PGDE', 'MSC / MBA', 'PHD']
+        },
+        {
+            title: 'Courses Attended After First Graduation',
             type: 'text',
-            value: ''
+            value: '',
         }
     ]);
     let [employmentData, setEmploymentData] = useState([
         {
-            title: 'Job Title',
-            type: 'text',
-            value: ''
+            title: 'Are You Employed',
+            type: 'select',
+            value: '',
+            options: ['Yes', 'No']
         },
         {
-            title: 'Job Content',
-            type: 'text',
-            value: ''
+            title: 'Type Of Employment',
+            type: 'select',
+            value: '',
+            options: ['Public', 'Private', 'NGO', 'Self Employed']
         },
         {
             title: 'Name of Organisation',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Year Of Employment',
             type: 'text',
             value: ''
         },
@@ -214,12 +268,7 @@ export default function FormPage() {
             value: ''
         },
         {
-            title: 'Salary Scale',
-            type: 'number',
-            value: ''
-        },
-        {
-            title: 'Hours Worked Per Day',
+            title: 'Job Title',
             type: 'text',
             value: ''
         },
@@ -228,16 +277,38 @@ export default function FormPage() {
             type: 'text',
             value: ''
         },
+        
         {
-            title: 'Year Of Termination',
-            type: 'text',
+            title: 'Date Of Employment',
+            type: 'date',
+            value: ''
+        },
+        
+        {
+            title: 'Grade Level / Scale',
+            type: 'number',
             value: ''
         },
         {
-            title: 'Reason For Termination',
-            type: 'text',
-            value: ''
+            title: 'Basic Salary',
+            type: 'select',
+            value: '',
+            options: salaryRange(1, 400, 19)
         },
+        {
+            title: 'Monthly Salary',
+            type: 'select',
+            value: '',
+            options: salaryRange(1, 500, 19)
+        },
+        {
+            title: 'Annual Salary',
+            type: 'select',
+            value: '',
+            options: ['Below 100,000', '101,000 - 500,000', '501,000 - 1,000,000', 'Above 1,000,000']
+        },
+        
+        
     ]);
 
     useEffect(() => {
@@ -264,6 +335,8 @@ export default function FormPage() {
     const validateEntries = () => {
         return false;
     }
+
+    
 
     let navigateTabs = (direction) => {
         if(direction === 'back') {
