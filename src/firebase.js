@@ -34,7 +34,7 @@ const signIn = async (email, password) => {
 };
 
 // register with email and password
-const signUp = async (name, email, password) => {
+const signUp = async (name, email, password, userData) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
@@ -42,6 +42,7 @@ const signUp = async (name, email, password) => {
         uid: user.uid,
         name,
         email,
+        ...userData
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (err) {

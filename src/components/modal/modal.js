@@ -19,9 +19,9 @@ export default function Popup({lgShow, setLgShow, data}) {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProfileForm setData={console.log('ii')} data={data.profile} disabled={true}/>
-            <QualificationForm setData={console.log('ii')} data={data.qualification} disabled={true} />
-            <EmploymentForm setData={console.log('ii')} data={data.employment} disabled={true} />
+            <ProfileForm setData={null} data={data.profile} disabled={true}/>
+            <QualificationForm setData={null} data={data.qualification} disabled={true} />
+            <EmploymentForm setData={null} data={data.employment} disabled={true} />
           </Modal.Body>
         </Modal>
       </>

@@ -52,7 +52,6 @@ export default function TablePage(){
     }
 
     function showRecord(record){
-        console.log('record', record)
         setModalData(record);
         setLgShow(true);
     }

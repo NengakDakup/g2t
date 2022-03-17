@@ -72,23 +72,29 @@ export default function FormPage() {
         {
             title: 'Marital Status',
             type: 'select',
-            value: '',
+            value: 'Married',
             options: ['Married', 'Single', 'Divorced', 'Widow/Widower']
         },
         {
             title: 'Date Of Marriage',
             type: 'date',
-            value: ''
+            value: '',
+            requiredTitle: 'Marital Status',
+            requiredValue: 'Married'
         },
         {
             title: 'Date Of Divorce',
             type: 'date',
-            value: ''
+            value: '',
+            requiredTitle: 'Marital Status',
+            requiredValue: 'Divorced'
         },
         {
             title: 'Date Of Widow/Widower',
             type: 'date',
-            value: ''
+            value: '',
+            requiredTitle: 'Marital Status',
+            requiredValue: 'Widow/Widower'
         },
         {
             title: 'Number of Children',
@@ -119,13 +125,17 @@ export default function FormPage() {
         {
             title: 'If Yes Specify',
             type: 'text',
-            value: ''
+            value: '',
+            requiredTitle: 'Do You Have Any Disability?',
+            requiredValue: 'Yes'
         },
         {
             title: 'When Did it Occur?',
             type: 'select',
             value: '',
-            options: ['Before Graduation', 'After Graduation']
+            options: ['Before Graduation', 'After Graduation'],
+            requiredTitle: 'Do You Have Any Disability?',
+            requiredValue: 'Yes'
         },
         {
             title: 'Contact [Mobile Phone Number]',
@@ -142,19 +152,25 @@ export default function FormPage() {
             title: 'University Attended',
             type: 'select',
             value: '',
-            options: universities.map(item => item.name)
+            options: universities.map(item => item.name),
+            requiredTitle: 'Institution Attended',
+            requiredValue: 'University'
         },
         {
             title: 'Polytechnic Attended',
             type: 'select',
             value: '',
-            options: polytechnics.map(item => item)
+            options: polytechnics.map(item => item),
+            requiredTitle: 'Institution Attended',
+            requiredValue: 'Polytechnic'
         },
         {
             title: 'College Attended',
             type: 'select',
             value: '',
-            options: colleges.map(item => item.name)
+            options: colleges.map(item => item.name),
+            requiredTitle: 'Institution Attended',
+            requiredValue: 'College Of Education'
         },
         {
             title: 'Year Of Entry',
@@ -242,6 +258,16 @@ export default function FormPage() {
             title: 'Courses Attended After First Graduation',
             type: 'text',
             value: '',
+        },
+        {
+            title: 'Special Skills Acquired Before Graduation',
+            type: 'text',
+            value: '',
+        },
+        {
+            title: 'Special Skills Acquired After Graduation',
+            type: 'text',
+            value: '',
         }
     ]);
     let [employmentData, setEmploymentData] = useState([
@@ -255,7 +281,8 @@ export default function FormPage() {
             title: 'Type Of Employment',
             type: 'select',
             value: '',
-            options: ['Public', 'Private', 'NGO', 'Self Employed']
+            options: ['Public', 'Private', 'NGO', 'Self Employed'],
+            
         },
         {
             title: 'Name of Organisation',
