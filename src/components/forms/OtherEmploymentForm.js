@@ -1,8 +1,8 @@
 import react, {useState} from 'react';
-import {Form, Row, Col, Button } from 'react-bootstrap';
+import {Form, Row, Col } from 'react-bootstrap';
 
-export default function QualificationForm({setData, data, addSkill, disabled}){
-    
+export default function OtherEmploymentForm({setData, data, disabled}){
+
     function updateItem(index, val){
         setData(data.map((item, i) => {
             if(i === index){
@@ -36,7 +36,7 @@ export default function QualificationForm({setData, data, addSkill, disabled}){
 
     return (
             <Form.Group className="mb-3">
-                <h1>Qualifications</h1>
+                <h4>Other Job/Source Of Income</h4>
                 <Row className="mb-3">
                 {data.map((item, index) => {
                         if(item.requiredTitle){
@@ -68,8 +68,6 @@ export default function QualificationForm({setData, data, addSkill, disabled}){
                         }
                         
                     })}
-                    <Button onClick={addSkill} variant="success" className="mt-3">Add Another Skill</Button>
-
                 </Row>
             </Form.Group>
     

@@ -84,14 +84,16 @@ const fetchUserData = async (userID) => {
   }
 };
 
-const updateProfileData = async (userID, profileData, qualificationData, employmentData) => {
+const updateProfileData = async (userID, profileData, qualificationData, employmentData, otherEmploymentData, previousEmploymentData) => {
   console.log('update user data');
   // const q = doc(db, "users");
 
   await setDoc(doc(db, "profiles", userID), {
     profile: profileData,
     qualification: qualificationData,
-    employment: employmentData
+    employment: employmentData,
+    otherEmploymentData, 
+    ...previousEmploymentData
   });
 }
 

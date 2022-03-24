@@ -37,6 +37,7 @@ export default function EmploymentForm({setData, data, disabled}){
     return (
             <Form.Group className="mb-3">
                 <h1>Employment</h1>
+                <h4>Current Employment</h4>
                 <Row className="mb-3">
                 {data.map((item, index) => {
                         if(item.requiredTitle){
@@ -50,7 +51,6 @@ export default function EmploymentForm({setData, data, disabled}){
                                     <Form.Group controlId="formGridEmail">
                                         <Form.Label>{item.title}</Form.Label>
                                         {renderInput(index, item)}
-                                        
                                     </Form.Group>
                                     </Col>
                                 )
