@@ -21,10 +21,10 @@ export default function EmploymentForm({setData, data, disabled}){
                 return <Form.Control value={item.value} disabled={disabled} type={item.type} placeholder={`Enter ${item.title}`} onChange={(e) => updateItem(index, e.target.value)} />
             case 'select':
                 return <Form.Select disabled={disabled} onChange={(e) => updateItem(index, e.target.value)}>
-                            {item.options.map((item, i) => {
+                            {item.options.map((_item, i) => {
                                 if(i==0){
-                                    return <><option>Select</option><option key={i}>{item}</option></>
-                                } else return <option key={i}>{item}</option>
+                                    return <><option>Select</option><option selected={item.value === _item} key={i}>{_item}</option></>
+                                } else return <option selected={item.value === _item} key={i}>{_item}</option>
                                 
                             })}
                         </Form.Select>

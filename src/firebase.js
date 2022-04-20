@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import {initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
-import { getFirestore, collection, addDoc, query, where, getDocs, doc, setDoc  } from "firebase/firestore";
+import { getFirestore, collection, addDoc, query, where, getDocs, getDoc, doc, setDoc  } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -74,7 +74,6 @@ const fetchUserData = async (userID) => {
     let res;
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
       res = doc.data();
     });
     return res;
@@ -92,15 +91,19 @@ const updateProfileData = async (userID, profileData, qualificationData, employm
     profile: profileData,
     qualification: qualificationData,
     employment: employmentData,
-    otherEmploymentData, 
-    ...previousEmploymentData
+    otherEmploymentData: {...otherEmploymentData}, 
+    previousEmploymentData: {...previousEmploymentData}
   });
 }
 
-const fetchRecords = async () => {
+const fetchRecords = async (uid) => {
   const querySnapshot = await getDocs(collection(db, "profiles"));
   return querySnapshot;
+}
 
+const fetchUserRecords = async (uid) => {
+  const querySnapshot = await getDoc(doc(db, "profiles", uid));
+  return querySnapshot.data();
 }
 
 export {
@@ -112,5 +115,6 @@ export {
     logout,
     fetchUserData,
     updateProfileData,
-    fetchRecords
+    fetchRecords,
+    fetchUserRecords
 };

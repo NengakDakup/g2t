@@ -3,7 +3,8 @@ import {Link, useNavigate} from 'react-router-dom'
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Container, Row, Col, Button, Form } from "react-bootstrap"
 import {FaArrowRight, FaArrowLeft} from 'react-icons/fa';
-import {auth, updateProfileData} from '../../firebase'
+import {auth, updateProfileData, fetchUserRecords} from '../../firebase'
+import ObjectToArray from '../../utils/ObjectToArray'
 
 import MainLayout from "../../components/layouts/MainLayout/MainLayout";
 import DashboardLayout from "../../components/layouts/DashboardLayout/DashboardLayout";
@@ -25,7 +26,6 @@ const salaryRange = (min, max, interval) => {
     let arr = [];
     for(let i = min; i < max; i+=interval){
         let txt = `${i},000 - ${i+interval},000`; 
-        console.log(txt)
         arr.push(txt)
         
     }
@@ -368,77 +368,79 @@ export default function FormPage() {
         
     ]);
     let [otherEmploymentData, setOtherEmploymentData] = useState([
-        {
-            title: 'Type Of Employment',
-            type: 'select',
-            value: '',
-            options: ['Public', 'Private', 'NGO', 'Self Employed'],
+        [
+            {
+                title: 'Type Of Employment',
+                type: 'select',
+                value: '',
+                options: ['Public', 'Private', 'NGO', 'Self Employed'],
+                
+            },
+            {
+                title: 'Name of Organisation',
+                type: 'text',
+                value: ''
+            },
+            {
+                title: 'Position',
+                type: 'text',
+                value: ''
+            },
+            {
+                title: 'Job Title',
+                type: 'text',
+                value: ''
+            },
+            {
+                title: 'Job Description',
+                type: 'text',
+                value: ''
+            },
             
-        },
-        {
-            title: 'Name of Organisation',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Position',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Job Title',
-            type: 'text',
-            value: ''
-        },
-        {
-            title: 'Job Description',
-            type: 'text',
-            value: ''
-        },
-        
-        {
-            title: 'Date Of Employment',
-            type: 'date',
-            value: ''
-        },
-        
-        {
-            title: 'Grade Level / Scale',
-            type: 'number',
-            value: ''
-        },
-        {
-            title: 'Number Of Staff',
-            type: 'number',
-            value: '',
-            requiredTitle: 'Type Of Employment',
-            requiredValue: 'Self Employed'
-        },
-        {
-            title: 'State Individual Staff Role',
-            type: 'text',
-            value: '',
-            requiredTitle: 'Type Of Employment',
-            requiredValue: 'Self Employed'
-        },
-        {
-            title: 'Basic Salary',
-            type: 'select',
-            value: '',
-            options: salaryRange(1, 400, 19)
-        },
-        {
-            title: 'Monthly Salary',
-            type: 'select',
-            value: '',
-            options: salaryRange(1, 500, 19)
-        },
-        {
-            title: 'Annual Salary',
-            type: 'select',
-            value: '',
-            options: ['Below 100,000', '101,000 - 500,000', '501,000 - 1,000,000', 'Above 1,000,000']
-        },
+            {
+                title: 'Date Of Employment',
+                type: 'date',
+                value: ''
+            },
+            
+            {
+                title: 'Grade Level / Scale',
+                type: 'number',
+                value: ''
+            },
+            {
+                title: 'Number Of Staff',
+                type: 'number',
+                value: '',
+                requiredTitle: 'Type Of Employment',
+                requiredValue: 'Self Employed'
+            },
+            {
+                title: 'State Individual Staff Role',
+                type: 'text',
+                value: '',
+                requiredTitle: 'Type Of Employment',
+                requiredValue: 'Self Employed'
+            },
+            {
+                title: 'Basic Salary',
+                type: 'select',
+                value: '',
+                options: salaryRange(1, 400, 19)
+            },
+            {
+                title: 'Monthly Salary',
+                type: 'select',
+                value: '',
+                options: salaryRange(1, 500, 19)
+            },
+            {
+                title: 'Annual Salary',
+                type: 'select',
+                value: '',
+                options: ['Below 100,000', '101,000 - 500,000', '501,000 - 1,000,000', 'Above 1,000,000']
+            },
+        ]
         
         
     ]);
@@ -519,6 +521,23 @@ export default function FormPage() {
         ],
     ])
 
+    async function fetchData () {
+        let userRecords = await fetchUserRecords(user.uid);
+
+        console.log('user records', userRecords);
+        
+        setEmploymentData(userRecords.employment);
+        setOtherEmploymentData(ObjectToArray(userRecords.otherEmploymentData));
+        setPreviousEmploymentData(ObjectToArray(userRecords.previousEmploymentData));
+        setProfileData(userRecords.profile);
+        setQualificationData(userRecords.qualification);
+
+    }
+
+    useEffect(() => {
+        if(user) fetchData();
+    }, [user])
+
     useEffect(() => {
         if (activeTab === 4) {
             updateProfileData(user.uid, profileData, qualificationData, employmentData, otherEmploymentData, previousEmploymentData);
@@ -533,8 +552,94 @@ export default function FormPage() {
         }))
     }
 
+    let updateOtherData = (data, index) => {
+        setOtherEmploymentData(otherEmploymentData.map((item, i) => {
+            if(index !== i){
+                return item;
+            } else return data;
+        }))
+    }
+
     let addPreviousEmploymentField = () => {
+        
         setPreviousEmploymentData([...previousEmploymentData, [
+            {
+                title: 'Type Of Employment',
+                type: 'select',
+                value: '',
+                options: ['Public', 'Private', 'NGO', 'Self Employed'],
+                
+            },
+            {
+                title: 'Name of Organisation',
+                type: 'text',
+                value: ''
+            },
+            {
+                title: 'Position',
+                type: 'text',
+                value: ''
+            },
+            {
+                title: 'Job Title',
+                type: 'text',
+                value: ''
+            },
+            {
+                title: 'Job Description',
+                type: 'text',
+                value: ''
+            },
+            
+            {
+                title: 'Date Of Employment',
+                type: 'date',
+                value: ''
+            },
+            
+            {
+                title: 'Grade Level / Scale',
+                type: 'number',
+                value: ''
+            },
+            {
+                title: 'Number Of Staff',
+                type: 'number',
+                value: '',
+                requiredTitle: 'Type Of Employment',
+                requiredValue: 'Self Employed'
+            },
+            {
+                title: 'State Individual Staff Role',
+                type: 'text',
+                value: '',
+                requiredTitle: 'Type Of Employment',
+                requiredValue: 'Self Employed'
+            },
+            {
+                title: 'Basic Salary',
+                type: 'select',
+                value: '',
+                options: salaryRange(1, 400, 19)
+            },
+            {
+                title: 'Monthly Salary',
+                type: 'select',
+                value: '',
+                options: salaryRange(1, 500, 19)
+            },
+            {
+                title: 'Annual Salary',
+                type: 'select',
+                value: '',
+                options: ['Below 100,000', '101,000 - 500,000', '501,000 - 1,000,000', 'Above 1,000,000']
+            },
+        ]])
+        
+    }
+
+    let addOtherEmploymentField = () => {
+        setOtherEmploymentData([...otherEmploymentData, [
             {
                 title: 'Type Of Employment',
                 type: 'select',
@@ -617,12 +722,15 @@ export default function FormPage() {
         } else if(activeTab === 3){
             return <>
                 <EmploymentForm setData={setEmploymentData} data={employmentData} />
-                <OtherEmploymentForm setData={setOtherEmploymentData} data={otherEmploymentData} />
+                {otherEmploymentData.map((item, i) => {
+                    return <OtherEmploymentForm updateData={updateOtherData} data={item} index={i} key={i} />
+                })}
+                <Button onClick={addOtherEmploymentField} variant="success" className="mt-3">Add Other Jobs/Source of Income</Button>
                 {previousEmploymentData.map((item, i) => {
                     return <PreviousEmploymentForm updateData={updateData} data={item} index={i} key={i} />
                 })}
-                <Button onClick={addPreviousEmploymentField} variant="success" className="mt-3">Add Another Previous employment Field</Button>
 
+                <Button onClick={addPreviousEmploymentField} variant="success" className="mt-3">Add Another Previous employment Field</Button>
             </>
         } else {
             return <>

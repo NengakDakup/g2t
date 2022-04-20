@@ -18,7 +18,7 @@ export default function Dashboard() {
 
     async function fetchData(uid){
         let res = await fetchUserData(uid);
-        console.log('res', res);
+        console.log('resp', res);
         setUserData(res);
     }
 

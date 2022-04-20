@@ -1,17 +1,19 @@
 import react, {useState} from 'react';
 import {Form, Row, Col } from 'react-bootstrap';
 
-export default function OtherEmploymentForm({setData, data, disabled}){
+export default function OtherEmploymentForm({updateData, data, index, disabled}){
+
+    console.log('data', data);
 
     function updateItem(index, val){
-        setData(data.map((item, i) => {
+        updateData(data.map((item, i) => {
             if(i === index){
                 item.value = val;
                 return item;
             } else {
                 return item;
             }
-        }));
+        }), index);
         
     }
 
@@ -21,10 +23,10 @@ export default function OtherEmploymentForm({setData, data, disabled}){
                 return <Form.Control value={item.value} disabled={disabled} type={item.type} placeholder={`Enter ${item.title}`} onChange={(e) => updateItem(index, e.target.value)} />
             case 'select':
                 return <Form.Select disabled={disabled} onChange={(e) => updateItem(index, e.target.value)}>
-                            {item.options.map((item, i) => {
+                            {item.options.map((_item, i) => {
                                 if(i==0){
-                                    return <><option>Select</option><option key={i}>{item}</option></>
-                                } else return <option key={i}>{item}</option>
+                                    return <><option>Select</option><option selected={item.value === _item} key={i}>{_item}</option></>
+                                } else return <option selected={item.value === _item} key={i}>{_item}</option>
                                 
                             })}
                         </Form.Select>
@@ -36,7 +38,7 @@ export default function OtherEmploymentForm({setData, data, disabled}){
 
     return (
             <Form.Group className="mb-3">
-                <h4>Other Job/Source Of Income</h4>
+                <h4>Other Jobs/Sources Of Income</h4>
                 <Row className="mb-3">
                 {data.map((item, index) => {
                         if(item.requiredTitle){

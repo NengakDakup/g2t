@@ -3,6 +3,10 @@ import { Modal} from 'react-bootstrap'
 import ProfileForm from '../forms/ProfileForm';
 import QualificationForm from '../forms/QualificationForm';
 import EmploymentForm from '../forms/EmploymentForm';
+import OtherEmploymentForm from '../forms/OtherEmploymentForm';
+import PreviousEmploymentForm from '../forms/PreviousEmploymentForm';
+
+import ObjectToArray from '../../utils/ObjectToArray';
 
 export default function Popup({lgShow, setLgShow, data}) {
     return (
@@ -22,6 +26,12 @@ export default function Popup({lgShow, setLgShow, data}) {
             <ProfileForm setData={null} data={data.profile} disabled={true}/>
             <QualificationForm setData={null} data={data.qualification} disabled={true} />
             <EmploymentForm setData={null} data={data.employment} disabled={true} />
+            {ObjectToArray(data.otherEmploymentData).map((item, i) => {
+              return <OtherEmploymentForm setData={null} data={item} disabled={true} key={i} />
+            })}
+            {ObjectToArray(data.previousEmploymentData).map((item, i) => {
+              return <PreviousEmploymentForm setData={null} data={item} disabled={true} key={i} />
+            })}
           </Modal.Body>
         </Modal>
       </>

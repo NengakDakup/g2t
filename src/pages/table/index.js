@@ -38,6 +38,7 @@ export default function TablePage(){
         res.forEach(item => {
             arr.push(item.data());
         });
+        console.log('resssss', arr);
         setProfiles(arr);
         
     }
@@ -52,6 +53,7 @@ export default function TablePage(){
     }
 
     function showRecord(record){
+        console.log(record);
         setModalData(record);
         setLgShow(true);
     }
@@ -86,18 +88,18 @@ export default function TablePage(){
                                 profilesQuery.map((item, i) => {
                                     return <tr key={i} onClick={() => showRecord(item)}>
                                         <td>{++i}</td>
-                                        <td>{item.profile[0].value}</td>
-                                        <td>{item.profile[3].value}</td>
-                                        <td>{item.profile[14].value}</td>
+                                        <td>{item.profile[24].value}</td>
+                                        <td>{item.profile[27].value}</td>
+                                        <td>{item.profile[17].value}</td>
                                     </tr>
                                 }) :
 
                                 profiles.map((item, i) => {
                                     return <tr key={i} onClick={() => showRecord(item)}>
                                         <td>{++i}</td>
-                                        <td>{item.profile[0].value}</td>
-                                        <td>{item.profile[3].value}</td>
-                                        <td>{item.profile[14].value}</td>
+                                        <td>{item.profile[24].value}</td>
+                                        <td>{item.profile[27].value}</td>
+                                        <td>{item.profile[17].value}</td>
                                     </tr>
                                 })
 
