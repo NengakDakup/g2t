@@ -48,12 +48,12 @@ export default function FormPage() {
             options: ['Mr', 'Mrs', 'Ms', 'Dr', 'Prof', 'Chief']
         },
         {
-            title: 'Surname',
+            title: 'First Name',
             type: 'text',
             value: ''
         },
         {
-            title: 'First Name',
+            title: 'Middle Name',
             type: 'text',
             value: ''
         },
